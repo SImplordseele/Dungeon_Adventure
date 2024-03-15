@@ -14,19 +14,19 @@ const int TILE_HOLE = 5;
 const int TOTAL_TILE_SPRITES = 6;
 class Map {
 public:
-	int TOTAL_TILES;
-	Tile** tiles;
-	Map(int tile_number, string map_tile_src, string img, SDL_Renderer* renderer);
-	~Map();
-	void setMapSize(int tile_x, int tile_y);
-	void setMapsrc(string path);
-	void LoadTile();
-	bool check_collision(SDL_Rect a, SDL_Rect b);
-	void rendermap(SDL_Rect& cam);
+    int TOTAL_TILES;
+    Tile** tiles;
+    Map(int tile_number, string map_tile_src, string img_src, SDL_Renderer* renderer);
+    ~Map();
+    void setMapSize(int tile_x, int tile_y);
+    void setMapsrc(string src);
+    void LoadTile();
+    bool check_collision(SDL_Rect a, SDL_Rect b);
+    void rendermap(SDL_Rect& cam);
 private:
-	string mapsrc;
-	Texture tileTexture;
-	SDL_Rect* tileClips;
-	int map_width;
-	int map_height;
+    string mapsrc;
+    Texture tileTexture;
+    SDL_Rect* tileClips;
+    int map_width;
+    int map_height;
 };

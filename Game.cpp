@@ -4,8 +4,6 @@
 #include "OpeningScreen.h"
 #include "Level.h"
 #include <string.h>
-const int SCREEN_WIDTH = 640;
-const int SCREEN_HEIGHT = 480;
 const string Help_document = "Documents/Help.txt";
 const string Level1_Map = "Maps/level_1_map.map";
 const string Tilesprite = "Sprites/tile_sprite_sheet.png";
@@ -86,19 +84,15 @@ int main(int argc, char* argv[]) {
 	OpeningScreen screen(SCREEN_WIDTH, SCREEN_HEIGHT, g_window, g_renderer,g_font);
 	screen.SetColor(0, 0, 0);
 	screen.SetTextPath(OpenDoc);
-
 	Player player(PlayerSprite,0,0,1,1,g_renderer);
 	player.objectTexture.set_renderer(g_renderer);
 	player.setClip(0, 96, Player_sprite_width, Player_sprite_height);
-
 	Map Level1Map(286, Level1_Map, Tilesprite, g_renderer);
-	Level1Map.setMapSize(22, 13);
-	
+	Level1Map.setMapSize(22, 13);	
 	Level Level1(SCREEN_WIDTH, SCREEN_HEIGHT, g_window, g_renderer, &player);
 	Level1.SetLevel(22, 13);
 	Level1.LoadLevel(&Level1Map);
 	player.SetPlayerPos(96, 960);
-
 	bool running = true;
 	int curr_screen = main_menu;
 	while (running) {

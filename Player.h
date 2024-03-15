@@ -13,13 +13,15 @@ const int touch_wall = 1;
 const int fall_hole = 2;
 const int falling = -1;
 const int pixelchangerperpress = 1;
+const int SCREEN_WIDTH = 640;
+const int SCREEN_HEIGHT = 480;
 class Key;
 class Player : public Object {
 public:
-    Player(string path, int x_pos, int y_pos, int x_velocity, int y_velocity, SDL_Renderer* renderer, Map* map = NULL);
+    Player(string path, int x_pos, int y_pos, int x_velocity, int y_velocity, SDL_Renderer* renderer, Map* level = NULL);
     ~Player();
     void LoadPlayer();
-    void SetlevelMap(Map* map);
+    void SetlevelMap(Map* level);
     void SetPlayerPos(int x_pos, int y_pos);
     void HandleEvent(SDL_Event& e, Key& key1, Key& key2, Key& key3);
     bool check_collision(SDL_Rect a, SDL_Rect b);
@@ -37,7 +39,7 @@ private:
     int curr_frame;
     SDL_Rect curr_sprite;
     int startX, startY;
-    Map* map;
+    Map* level;
     int picked_key_number;
 
 };

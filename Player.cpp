@@ -1,17 +1,17 @@
 #include "Player.h"
-Player::Player(string path, int x_pos, int y_pos, int x_velocity, int y_velocity, SDL_Renderer* renderer, Map* map) :
+Player::Player(string path, int x_pos, int y_pos, int x_velocity, int y_velocity, SDL_Renderer* renderer, Map* level) :
     Object(path, x_pos, y_pos, x_velocity, y_velocity, renderer) {
     LoadPlayer();
     curr_frame = 0;
     curr_sprite = clip_right[0];
-    this->map = map;
+    this->level = level;
     picked_key_number = 0;
     startX = x_pos;
     startY = y_pos;
 }
 Player::~Player() {
     objectTexture.free();
-    map = NULL;
+    level = NULL;
 }
 void Player::LoadPlayer() {
     for (int i = 0; i < TOTAL_PLAYER_SPRITE; ++i) {
@@ -39,12 +39,12 @@ void Player::LoadPlayer() {
         clip_down[i].h = Player_sprite_height;
     }
 }
-void Player::SetlevelMap(Map* map) {
-    this->map = map;
+void Player::SetlevelMap(Map* level) {
+    this->level = level;
 }
 void Player::SetPlayerPos(int x_pos, int y_pos) {
-    curr_sprite.x = x_pos;
-    curr_sprite.y = y_pos;
+    sprite_rect.x = x_pos;
+    sprite_rect.y = y_pos;
     startX = x_pos;
     startY = y_pos;
 }
@@ -143,7 +143,7 @@ int Player::move_Player() {
     if (x_vel > 0) {
         while (sprite_rect.x <= initX + x_vel) {
             sprite_rect.x += pixelsPerFrameChange;
-            positionOnTile = collide_with_wall(map->tiles, map->TOTAL_TILES, TILE_FLOOR, TILE_HOLE);
+            positionOnTile = collide_with_wall(level->tiles, level->TOTAL_TILES, TILE_FLOOR, TILE_HOLE);
             if (sprite_rect.x + Player_sprite_width > map_width || positionOnTile == 1) {
                 sprite_rect.x -= pixelsPerFrameChange;
                 break;
@@ -161,7 +161,7 @@ int Player::move_Player() {
     if (x_vel < 0) {
         while (sprite_rect.x >= initX + x_vel) {
             sprite_rect.x -= pixelsPerFrameChange;
-            positionOnTile = collide_with_wall(map->tiles, map->TOTAL_TILES, TILE_FLOOR, TILE_HOLE);
+            positionOnTile = collide_with_wall(level->tiles, level->TOTAL_TILES, TILE_FLOOR, TILE_HOLE);
             if (sprite_rect.x < 0 || positionOnTile == 1) {
                 sprite_rect.x += pixelsPerFrameChange;
                 break;
@@ -179,7 +179,7 @@ int Player::move_Player() {
     if (y_vel > 0) {
         while (sprite_rect.y <= initY + y_vel) {
             sprite_rect.y += pixelsPerFrameChange;
-            positionOnTile = collide_with_wall(map->tiles, map->TOTAL_TILES, TILE_FLOOR, TILE_HOLE);
+            positionOnTile = collide_with_wall(level->tiles, level->TOTAL_TILES, TILE_FLOOR, TILE_HOLE);
             if (sprite_rect.y + Player_sprite_height > map_height || positionOnTile == 1) {
                 sprite_rect.y -= pixelsPerFrameChange;
                 break;
@@ -197,7 +197,7 @@ int Player::move_Player() {
     if (y_vel < 0) {
         while (sprite_rect.y >= initY + y_vel) {
             sprite_rect.y -= pixelsPerFrameChange;
-            positionOnTile = collide_with_wall(map->tiles, map->TOTAL_TILES, TILE_FLOOR, TILE_HOLE);
+            positionOnTile = collide_with_wall(level->tiles, level->TOTAL_TILES, TILE_FLOOR, TILE_HOLE);
             if (sprite_rect.y < 0 || positionOnTile == 1) {
                 sprite_rect.y += pixelsPerFrameChange;
                 break;
@@ -229,7 +229,6 @@ void Player::setCam(SDL_Rect& cam, int w, int h) {
     if (cam.y > h - cam.h) {
         cam.y = h - cam.h;
     }
-
 }
 void Player::pickupKey(Key& key) {
     if (key.Ispicked() == false) {
