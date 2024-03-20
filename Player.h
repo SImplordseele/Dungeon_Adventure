@@ -31,6 +31,7 @@ public:
     void pickupKey(Key& key);
     bool open_door(SDL_Event& e);
     void render(int camX, int camY);
+    void resetkey();
 private:
     SDL_Rect clip_left[TOTAL_PLAYER_SPRITE];
     SDL_Rect clip_right[TOTAL_PLAYER_SPRITE];
@@ -41,5 +42,8 @@ private:
     int startX, startY;
     Map* level;
     int picked_key_number;
-
+    int dx1[4] = { 0,96,0,-96 };
+    int dx2[4] = { 96,192,96,0 };
+    int dy1[4] = { -96,0,96,0 };
+    int dy2[4] = { 0,96,192,96 };
 };

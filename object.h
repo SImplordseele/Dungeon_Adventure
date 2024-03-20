@@ -9,6 +9,7 @@ public:
     ~Object();
     int getX();
     int getY();
+    void changepos(int x_pos, int y_pos);
     void setMapSize(int w, int h);
     void setClip(int x, int y, int w, int h);
     void HandleEvent(SDL_Event& e);

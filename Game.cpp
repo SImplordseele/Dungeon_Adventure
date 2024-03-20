@@ -4,12 +4,15 @@
 #include "OpeningScreen.h"
 #include "Level.h"
 #include <string.h>
+#include "Player.h"
 const string Help_document = "Documents/Help.txt";
 const string Level1_Map = "Maps/level_1_map.map";
 const string Tilesprite = "Sprites/tile_sprite_sheet.png";
 const string PlayerSprite = "Sprites/link_sprite_sheet.png";
 const string OpenDoc = "Documents/Introduction_Text.txt";
 const string fontsrc = "Fonts/Times_New_Roman.ttf";
+const string Level2_Map = "Maps/level_2_map.map";
+const string Level3_Map = "Maps/level_3_map.map";
 SDL_Window* g_window = NULL;
 SDL_Renderer* g_renderer = NULL;
 TTF_Font* g_font = NULL;
@@ -22,6 +25,7 @@ string Help(string pathsrc) {
 	txt << open.rdbuf();
 	return txt.str();
 }
+int Level::lv = 1;
 bool Init() {
 	//Initialization flag
 	bool success = true;
@@ -84,15 +88,29 @@ int main(int argc, char* argv[]) {
 	OpeningScreen screen(SCREEN_WIDTH, SCREEN_HEIGHT, g_window, g_renderer,g_font);
 	screen.SetColor(0, 0, 0);
 	screen.SetTextPath(OpenDoc);
-	Player player(PlayerSprite,0,0,1,1,g_renderer);
+	Player player(PlayerSprite, 0, 0, 1, 1, g_renderer);
 	player.objectTexture.set_renderer(g_renderer);
 	player.setClip(0, 96, Player_sprite_width, Player_sprite_height);
 	Map Level1Map(286, Level1_Map, Tilesprite, g_renderer);
-	Level1Map.setMapSize(22, 13);	
+	Level1Map.setMapSize(22, 13);
 	Level Level1(SCREEN_WIDTH, SCREEN_HEIGHT, g_window, g_renderer, &player);
 	Level1.SetLevel(22, 13);
-	Level1.LoadLevel(&Level1Map);
-	player.SetPlayerPos(96, 960);
+	Map Level2Map(286, Level2_Map, Tilesprite, g_renderer);
+	Level2Map.setMapSize(22, 13);
+	Level Level2(SCREEN_WIDTH, SCREEN_HEIGHT, g_window, g_renderer, &player);
+	Level2.SetLevel(22, 13);
+	Map Level3Map(345, Level3_Map, Tilesprite, g_renderer);
+	Level3Map.setMapSize(23, 15);
+	Level Level3(SCREEN_WIDTH, SCREEN_HEIGHT, g_window, g_renderer, &player);
+	Level3.SetLevel(23, 15);
+	Map Level4Map(286, Level3_Map, Tilesprite, g_renderer);
+	Level4Map.setMapSize(22, 13);
+	Level Level4(SCREEN_WIDTH, SCREEN_HEIGHT, g_window, g_renderer, &player);
+	Level4.SetLevel(22, 13);
+	Map Level5Map(286, Level3_Map, Tilesprite, g_renderer);
+	Level5Map.setMapSize(22, 13);
+	Level Level5(SCREEN_WIDTH, SCREEN_HEIGHT, g_window, g_renderer, &player);
+	Level5.SetLevel(22, 13);
 	bool running = true;
 	int curr_screen = main_menu;
 	while (running) {
@@ -100,21 +118,48 @@ int main(int argc, char* argv[]) {
 			case main_menu:
 				curr_screen = startMenu.showMenu();
 				break;
-			case start:
+			case lv1:
 				SDL_Delay(500);
 				screen.RenderText();
+				player.SetPlayerPos(96, 960);
+				Level1.LoadLevel(&Level1Map);
 				curr_screen = Level1.PlayLevel();
+				break;
+			case lv2:
+				SDL_Delay(300);
+				player.SetPlayerPos(480, 192);
+				Level2.LoadLevel(&Level2Map);
+				curr_screen = Level2.PlayLevel();
+				break;
+			case lv3:
+				SDL_Delay(300);
+				player.SetPlayerPos(864, 576);
+				Level3.LoadLevel(&Level3Map);
+				curr_screen = Level3.PlayLevel();
+				break;
+			case lv4:
+				SDL_Delay(300);
+				player.SetPlayerPos(480, 192);
+				Level4.LoadLevel(&Level4Map);
+				curr_screen = Level4.PlayLevel();
+				break;
+			case lv5:
+				SDL_Delay(300);
+				player.SetPlayerPos(480, 192);
+				Level5.LoadLevel(&Level5Map);
+				curr_screen = Level5.PlayLevel();
 				break;
 			case help:
 				cout << Help(Help_document) << "\n";
 				curr_screen = main_menu;
 				break;
-			case Exit:
+			case quit:
 				cout << "Quit game\n";
 				running = false;
 				break;
-			case Won:
+			case win:
 				cout << "You won\n";
+				running = false;
 				break;
 			case falling:
 				cout << "You lost\n";

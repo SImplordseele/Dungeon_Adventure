@@ -6,10 +6,14 @@ const int BUTTON_TOTAL = 3;
 const int BUTTON_WIDTH = 155;
 const int BUTTON_HEIGHT = 100;
 const int main_menu = 0;
-const int start = 1;
-const int help = 2;
-const int Exit = 3;
-const int Won = 4;
+const int lv1 = 1;
+const int lv2 = 2;
+const int lv3 = 3;
+const int lv4 = 4;
+const int lv5 = 5;
+const int help = 6;
+const int quit = 7;
+const int win = 8;
 struct Button {
 public:
     string Text;

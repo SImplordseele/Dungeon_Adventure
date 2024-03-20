@@ -23,10 +23,10 @@ public:
     void LoadTile();
     bool check_collision(SDL_Rect a, SDL_Rect b);
     void rendermap(SDL_Rect& cam);
+    SDL_Rect* tileClips;
 private:
     string mapsrc;
     Texture tileTexture;
-    SDL_Rect* tileClips;
     int map_width;
     int map_height;
 };

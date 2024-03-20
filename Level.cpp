@@ -38,22 +38,33 @@ void Level::LoadLevel(Map* level) {
     player->SetlevelMap(level);
 }
 int Level::PlayLevel() {
+    player->resetkey();
     player->setMapSize(LEVEL_WIDTH, LEVEL_HEIGHT);
     Key key1("Sprites/Key.png", 192, 768, 0, 0, renderer);
     Key key2("Sprites/Key.png", 576, 768, 0, 0, renderer);
     Key key3("Sprites/Key.png", 1152, 768, 0, 0, renderer);
+    if (lv == 2) {
+        key1.changepos(192, 672);
+        key2.changepos(384, 960);
+        key3.changepos(1056, 384);
+    }
+    if (lv == 3) {
+        key1.changepos(1824, 576);
+        key2.changepos(96, 864);
+        key3.changepos(1824, 1152);
+    }
     SDL_Event e;
     bool running = true;
     while (running) {
         while (SDL_PollEvent(&e) != 0) {
             if (e.type == SDL_QUIT) {
                 running = false;
-                return 3;
+                return 4;
             }
             if (e.type == SDL_KEYDOWN) {
                 if (e.key.keysym.sym == SDLK_ESCAPE || e.key.keysym.sym == SDLK_q) {
                     running = false;
-                    return 3;
+                    return 4;
                 }
                 if (e.key.keysym.sym == SDLK_h || e.key.keysym.sym == SDLK_F1) {
                     cout << Help(Help_document) << "\n";
@@ -61,7 +72,8 @@ int Level::PlayLevel() {
             }
             player->HandleEvent(e, key1, key2, key3);
             if (player->open_door(e) == true) {
-                return 4;
+                Level::lv++;
+                return lv;
             }
         }
         SDL_RenderClear(renderer);

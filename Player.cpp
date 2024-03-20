@@ -144,11 +144,11 @@ int Player::move_Player() {
         while (sprite_rect.x <= initX + x_vel) {
             sprite_rect.x += pixelsPerFrameChange;
             positionOnTile = collide_with_wall(level->tiles, level->TOTAL_TILES, TILE_FLOOR, TILE_HOLE);
-            if (sprite_rect.x + Player_sprite_width > map_width || positionOnTile == 1) {
+            if (sprite_rect.x + Player_sprite_width > map_width || positionOnTile == touch_wall) {
                 sprite_rect.x -= pixelsPerFrameChange;
                 break;
             }
-            if (positionOnTile == 2) {
+            if (positionOnTile == fall_hole) {
                 return falling;
             }
             frameCount++;
@@ -162,11 +162,11 @@ int Player::move_Player() {
         while (sprite_rect.x >= initX + x_vel) {
             sprite_rect.x -= pixelsPerFrameChange;
             positionOnTile = collide_with_wall(level->tiles, level->TOTAL_TILES, TILE_FLOOR, TILE_HOLE);
-            if (sprite_rect.x < 0 || positionOnTile == 1) {
+            if (sprite_rect.x < 0 || positionOnTile == touch_wall) {
                 sprite_rect.x += pixelsPerFrameChange;
                 break;
             }
-            if (positionOnTile == 2) {
+            if (positionOnTile == fall_hole) {
                 return falling;
             }
             frameCount++;
@@ -180,11 +180,11 @@ int Player::move_Player() {
         while (sprite_rect.y <= initY + y_vel) {
             sprite_rect.y += pixelsPerFrameChange;
             positionOnTile = collide_with_wall(level->tiles, level->TOTAL_TILES, TILE_FLOOR, TILE_HOLE);
-            if (sprite_rect.y + Player_sprite_height > map_height || positionOnTile == 1) {
+            if (sprite_rect.y + Player_sprite_height > map_height || positionOnTile == touch_wall) {
                 sprite_rect.y -= pixelsPerFrameChange;
                 break;
             }
-            if (positionOnTile == 2) {
+            if (positionOnTile == fall_hole) {
                 return falling;
             }
             frameCount++;
@@ -198,11 +198,11 @@ int Player::move_Player() {
         while (sprite_rect.y >= initY + y_vel) {
             sprite_rect.y -= pixelsPerFrameChange;
             positionOnTile = collide_with_wall(level->tiles, level->TOTAL_TILES, TILE_FLOOR, TILE_HOLE);
-            if (sprite_rect.y < 0 || positionOnTile == 1) {
+            if (sprite_rect.y < 0 || positionOnTile == touch_wall) {
                 sprite_rect.y += pixelsPerFrameChange;
                 break;
             }
-            if (positionOnTile == 2) {
+            if (positionOnTile == fall_hole) {
                 return falling;
             }
             frameCount++;
@@ -241,8 +241,16 @@ void Player::pickupKey(Key& key) {
 bool Player::open_door(SDL_Event& e) {
     if (e.type == SDL_KEYDOWN && e.key.keysym.sym == SDLK_RETURN) {
         if (picked_key_number == TOTAL_KEY) {
-            if (sprite_rect.x >= 1920 && sprite_rect.y <= 384) {
-                return true;
+            for (int i = 0; i < level->TOTAL_TILES; i++) {
+                int tileType = level->tiles[i]->getType();
+                if (tileType == TILE_DOOR) {
+                    SDL_Rect rect = level->tiles[i]->getRect();
+                    for (int i = 0; i < 4; i++) {
+                        if (sprite_rect.x >= rect.x + dx1[i] && sprite_rect.x <= rect.x + dx2[i]
+                            && sprite_rect.y >= rect.y + dy1[i] && sprite_rect.y <= rect.y + dy2[i])
+                            return true;
+                    }
+                }
             }
         }
         cout << "\nYou have " << picked_key_number << " keys with you right now.\n";
@@ -252,4 +260,7 @@ bool Player::open_door(SDL_Event& e) {
 }
 void Player::render(int camX, int camY) {
     objectTexture.render(sprite_rect.x - camX, sprite_rect.y - camY, &curr_sprite);
+}
+void Player::resetkey() {
+    picked_key_number = 0;
 }

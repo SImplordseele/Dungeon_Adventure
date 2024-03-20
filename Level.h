@@ -10,6 +10,7 @@ extern const string Help_document;
 extern string Help(string);
 class Level {
 public:
+    static int lv;
     Level(int cam_w, int cam_h, SDL_Window* window, SDL_Renderer* renderer, Player* player);
     ~Level();
     void SetLevel(int x, int y);

@@ -33,7 +33,7 @@ void OpeningScreen::RenderText() {
     SDL_RenderClear(renderer);
     string text = ReadFile();
     texture.LoadTextImage(text, color);
-    texture.render((width - texture.get_width()) / 2, (height - texture.get_width()) / 2);
+    texture.render((width - texture.get_width()) / 2, (height - texture.get_width()) / 2 + 80);
     SDL_RenderPresent(renderer);
     SDL_Event e;
     while (true) {

@@ -10,6 +10,10 @@ Object::Object(string sprite_src_path, int x_pos, int y_pos, int x_velocity, int
     objectTexture.set_renderer(renderer);
     objectTexture.LoadFileImage(sprite_src);
 }
+void Object::changepos(int x_pos, int y_pos) {
+    sprite_rect.x = x_pos;
+    sprite_rect.y = y_pos;
+}
 Object::~Object() {
     objectTexture.free();
 }
