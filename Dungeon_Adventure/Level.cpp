@@ -55,8 +55,13 @@ int Level::PlayLevel() {
     }
     else if (lv == 4) {
         key1.changepos(288,1152);
-        key2.changepos(1440,1248);
+        key2.changepos(1440,1344);
         key3.changepos(1536,384);
+    }
+    else if (lv == 5) {
+        key1.changepos(288, 1536);
+        key2.changepos(2400, 1152);
+        key3.changepos(1440, 96);
     }
     SDL_Event e;
     bool running = true;
@@ -78,6 +83,7 @@ int Level::PlayLevel() {
             player->HandleEvent(e, key1, key2, key3);
             if (player->open_door(e) == true) {
                 Level::lv++;
+                if (lv > 5) return 8;
                 return lv;
             }
         }

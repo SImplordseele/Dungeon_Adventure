@@ -112,7 +112,6 @@ bool Player::check_collision(SDL_Rect a, SDL_Rect b) {
     left_b = b.x; right_b = b.x + b.w;
     top_b = b.y; bottom_b = b.y + b.h;
     if (top_a >= bottom_b || top_b >= bottom_a || left_a >= right_b || left_b >= right_a) return false;
-
     return true;
 }
 int Player::collide_with_wall(Tile* tiles[], int tiles_number, int TILE_FLOOR, int TILE_HOLE) {
@@ -156,6 +155,7 @@ int Player::move_Player() {
                 frameCount = 0;
             }
             curr_sprite = clip_right[frameCount];
+            spotify.walk_sound();
         }
     }
     if (x_vel < 0) {
@@ -174,6 +174,7 @@ int Player::move_Player() {
                 frameCount = 0;
             }
             curr_sprite = clip_left[frameCount];
+            spotify.walk_sound();
         }
     }
     if (y_vel > 0) {
@@ -192,6 +193,7 @@ int Player::move_Player() {
                 frameCount = 0;
             }
             curr_sprite = clip_down[frameCount];
+            spotify.walk_sound();
         }
     }
     if (y_vel < 0) {
@@ -210,6 +212,7 @@ int Player::move_Player() {
                 frameCount = 0;
             }
             curr_sprite = clip_up[frameCount];
+            spotify.walk_sound();
         }
     }
     return 1;
@@ -234,27 +237,35 @@ void Player::pickupKey(Key& key) {
     if (key.Ispicked() == false) {
         if (check_collision(Player::sprite_rect, key.get_rect())) {
             key.pick();
+            spotify.pick_sound();
+            SDL_Delay(400);
             picked_key_number++;
         }
     }
 }
 bool Player::open_door(SDL_Event& e) {
     if (e.type == SDL_KEYDOWN && e.key.keysym.sym == SDLK_RETURN) {
-        if (picked_key_number == TOTAL_KEY) {
-            for (int i = 0; i < level->TOTAL_TILES; i++) {
-                int tileType = level->tiles[i]->getType();
-                if (tileType == TILE_DOOR) {
-                    SDL_Rect rect = level->tiles[i]->getRect();
-                    for (int i = 0; i < 4; i++) {
-                        if (sprite_rect.x >= rect.x + dx1[i] && sprite_rect.x <= rect.x + dx2[i]
-                            && sprite_rect.y >= rect.y + dy1[i] && sprite_rect.y <= rect.y + dy2[i])
+        for (int i = 0; i < level->TOTAL_TILES; i++) {
+            int tileType = level->tiles[i]->getType();
+            if (tileType == TILE_DOOR) {
+                SDL_Rect rect = level->tiles[i]->getRect();
+                for (int i = 0; i < 4; i++) {
+                    if (sprite_rect.x >= rect.x + dx1[i] && sprite_rect.x <= rect.x + dx2[i]
+                        && sprite_rect.y >= rect.y + dy1[i] && sprite_rect.y <= rect.y + dy2[i]) {
+                        if (picked_key_number == TOTAL_KEY) {
+                            spotify.open_sound();
                             return true;
+                        }
+                        else {
+                            spotify.knock_sound();
+                            SDL_Delay(1000);
+                        }
                     }
                 }
             }
         }
         cout << "\nYou have " << picked_key_number << " keys with you right now.\n";
-        cout << "You still need to find " << TOTAL_KEY - picked_key_number << " keys.\n" ;
+        cout << "You still need to find " << TOTAL_KEY - picked_key_number << " keys.\n";
     }
     return false;
 }

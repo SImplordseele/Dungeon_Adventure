@@ -1,4 +1,5 @@
 #pragma once
+#include "soundeffect.h"
 #include "object.h"
 #include "Map.h"
 #include "Key.h"
@@ -32,6 +33,7 @@ public:
     bool open_door(SDL_Event& e);
     void render(int camX, int camY);
     void resetkey();
+    Sound spotify;
 private:
     SDL_Rect clip_left[TOTAL_PLAYER_SPRITE];
     SDL_Rect clip_right[TOTAL_PLAYER_SPRITE];

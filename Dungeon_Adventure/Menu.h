@@ -2,6 +2,7 @@
 #include <SDL.h>
 #include <SDL_ttf.h>
 #include "Texture.h"
+#include <SDL_mixer.h>
 const int BUTTON_TOTAL = 3;
 const int BUTTON_WIDTH = 155;
 const int BUTTON_HEIGHT = 100;
@@ -28,9 +29,12 @@ public:
     SDL_Texture* setTexture(TTF_Font* font, string text, SDL_Color color);
     void setupMenu();
     int showMenu();
+    int showHelp();
 private:
+    Mix_Chunk* mouse_click;
     int menu_width;
     int menu_height;
+    Texture help_menu;
     TTF_Font* menu_font;
     SDL_Window* menu_window;
     SDL_Renderer* menu_renderer;

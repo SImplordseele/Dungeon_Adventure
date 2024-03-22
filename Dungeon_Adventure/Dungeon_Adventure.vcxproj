@@ -27,6 +27,8 @@
     <ClCompile Include="Menu.cpp" />
     <ClCompile Include="object.cpp" />
     <ClCompile Include="OpeningScreen.cpp" />
+    <ClCompile Include="soundeffect.cpp" />
+    <ClCompile Include="soundeffect.h" />
     <ClCompile Include="Texture.cpp" />
     <ClCompile Include="Tile.cpp" />
   </ItemGroup>

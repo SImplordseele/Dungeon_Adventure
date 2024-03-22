@@ -45,6 +45,12 @@
     <ClCompile Include="Level.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="soundeffect.h">
+      <Filter>Header Files</Filter>
+    </ClCompile>
+    <ClCompile Include="soundeffect.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Menu.h">

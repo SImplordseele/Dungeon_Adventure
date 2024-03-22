@@ -6,6 +6,7 @@ Menu::Menu(int w, int h, SDL_Window* window, SDL_Renderer* renderer, TTF_Font* f
     menu_renderer = renderer;
     this->menu_font = font;
     menu_Button = new Button[BUTTON_TOTAL];
+    mouse_click = Mix_LoadWAV("Sound/mouse-click.wav");
 }
 Menu::~Menu() {
     delete[]menu_Button;
@@ -47,26 +48,28 @@ void Menu::setupMenu() {
     title_pos.y = 50;
     title_pos.w = 440;
     title_pos.h = 150;
+    help_menu.set_renderer(menu_renderer);
+    if (!help_menu.LoadFileImage("Sprites/Untitled.png")) {
+        cout << "failed\n";
+    };
 }
 
 int Menu::showMenu() {
     SDL_Event e;
-    bool running = true;
     int x, y;
-    while (running) {
+    while (true) {
         while (SDL_PollEvent(&e) != 0) {
             switch (e.type) {
             case SDL_MOUSEMOTION:
                 x = e.motion.x;
                 y = e.motion.y;
                 for (int i = 0; i < BUTTON_TOTAL; ++i) {
-                    if (x >= menu_Button[i].position.x && x <= menu_Button[i].position.x + menu_Button[i].position.w) {
-                        if (y >= menu_Button[i].position.y && y <= menu_Button[i].position.y + menu_Button[i].position.h) {
+                    if (x >= menu_Button[i].position.x && x <= menu_Button[i].position.x + menu_Button[i].position.w
+                        && y >= menu_Button[i].position.y && y <= menu_Button[i].position.y + menu_Button[i].position.h) {
                             if (!menu_Button[i].hover) {
                                 menu_Button[i].hover = true;
                                 menu_Button[i].texture = setTexture(menu_font, menu_Button[i].Text, buttonColor[1]);
                             }
-                        }
                     }
                     else if (menu_Button[i].hover) {
                         menu_Button[i].hover = false;
@@ -80,6 +83,8 @@ int Menu::showMenu() {
                 for (int i = 0; i < BUTTON_TOTAL; ++i) {
                     if (x >= menu_Button[i].position.x && x <= menu_Button[i].position.x + menu_Button[i].position.w) {
                         if (y >= menu_Button[i].position.y && y <= menu_Button[i].position.y + menu_Button[i].position.h) {
+                            Mix_PlayChannel(-1, mouse_click, 0);
+                            SDL_Delay(200);
                             if (i == 0) return lv1;
                             else if (i == 1) return help;
                             else if (i == 2) return quit;
@@ -97,6 +102,19 @@ int Menu::showMenu() {
         }
         SDL_RenderPresent(menu_renderer);
     }
+
     return 0;
 }
-
+int Menu::showHelp() {
+    SDL_Event e;
+    while (true) {
+        while (SDL_PollEvent(&e)) {
+            if (e.type == SDL_KEYDOWN && e.key.keysym.sym == SDLK_RETURN) {
+                SDL_RenderClear(menu_renderer);
+                return main_menu;
+            }
+        }
+        help_menu.render(0, 0);
+        SDL_RenderPresent(menu_renderer);
+    }
+}

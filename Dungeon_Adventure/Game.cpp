@@ -10,7 +10,7 @@ const string Level1_Map = "Maps/level_1_map.map";
 const string Tilesprite = "Sprites/tile_sprite_sheet.png";
 const string PlayerSprite = "Sprites/link_sprite_sheet.png";
 const string OpenDoc = "Documents/Introduction_Text.txt";
-const string fontsrc = "Fonts/Times_New_Roman.ttf";
+const string fontsrc = "Fonts/font.ttf";
 const string Level2_Map = "Maps/level_2_map.map";
 const string Level3_Map = "Maps/level_3_map.map";
 const string Level4_Map = "Maps/level_4_map.map";
@@ -18,6 +18,7 @@ const string Level5_Map = "Maps/level_5_map.map";
 SDL_Window* g_window = NULL;
 SDL_Renderer* g_renderer = NULL;
 TTF_Font* g_font = NULL;
+Texture g_texture;
 string Help(string pathsrc) {
 	ifstream open(pathsrc);
 	if (open.fail()) {
@@ -66,11 +67,19 @@ bool Init() {
 					cout << "SDL_image could not initialize! SDL_image Error: %s\n" << IMG_GetError();
 					success = false;
 				}
+				if (Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 2048) < 0) {
+					cout << "SDL_audio could not initialize! SDL_image Error: %s\n" << Mix_GetError();
+					success = false;
+				}
 			}
 		}
 	}
 	g_font = TTF_OpenFont(fontsrc.c_str(), 24);
 	return success;
+}
+bool LoadImg() {
+	g_texture.set_renderer(g_renderer);
+	return g_texture.LoadFileImage("Sprites/black.png");
 }
 void close() {
 	SDL_DestroyRenderer(g_renderer);
@@ -85,6 +94,7 @@ void close() {
 }
 int main(int argc, char* argv[]) {
 	if (!Init()) return -1;
+	if (!LoadImg()) return -1;
 	Menu startMenu(640, 480, g_window, g_renderer, g_font);
 	startMenu.setupMenu();
 	OpeningScreen screen(SCREEN_WIDTH, SCREEN_HEIGHT, g_window, g_renderer,g_font);
@@ -109,16 +119,21 @@ int main(int argc, char* argv[]) {
 	Level4Map.setMapSize(28, 18);
 	Level Level4(SCREEN_WIDTH, SCREEN_HEIGHT, g_window, g_renderer, &player);
 	Level4.SetLevel(28, 18);
-	Map Level5Map(286, Level3_Map, Tilesprite, g_renderer);
-	Level5Map.setMapSize(22, 13);
+	Map Level5Map(640, Level5_Map, Tilesprite, g_renderer);
+	Level5Map.setMapSize(32, 20);
 	Level Level5(SCREEN_WIDTH, SCREEN_HEIGHT, g_window, g_renderer, &player);
-	Level5.SetLevel(22, 13);
+	Level5.SetLevel(32, 20);
+	Mix_Music* menu_music;
+	menu_music = Mix_LoadMUS("Sound/menu.mp3");
 	bool running = true;
 	int curr_screen = main_menu;
 	while (running) {
 		switch (curr_screen) {
 			case main_menu:
+				Mix_PlayMusic(menu_music, -1);
+				g_texture.render(0,0);
 				curr_screen = startMenu.showMenu();
+				Mix_HaltMusic();
 				break;
 			case lv1:
 				SDL_Delay(500);
@@ -147,13 +162,13 @@ int main(int argc, char* argv[]) {
 				break;
 			case lv5:
 				SDL_Delay(300);
-				player.SetPlayerPos(480, 192);
+				player.SetPlayerPos(1152, 960);
 				Level5.LoadLevel(&Level5Map);
 				curr_screen = Level5.PlayLevel();
 				break;
 			case help:
-				cout << Help(Help_document) << "\n";
-				curr_screen = main_menu;
+				SDL_Delay(200);
+				curr_screen = startMenu.showHelp();
 				break;
 			case quit:
 				cout << "Quit game\n";
