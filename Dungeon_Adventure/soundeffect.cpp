@@ -4,6 +4,8 @@ Sound::Sound() {
 	pick_item = Mix_LoadWAV("Sound/pick.wav");
 	door_open_sound = Mix_LoadWAV("Sound/open.wav");
 	door_knock_sound = Mix_LoadWAV("Sound/knock.wav");
+	Mix_VolumeChunk(footstep, 40);
+	Mix_VolumeChunk(pick_item, MIX_MAX_VOLUME);
 }
 Sound::~Sound() {
 	if (footstep != NULL) {
@@ -23,7 +25,10 @@ void Sound::knock_sound() {
 	Mix_PlayChannel(-1, door_knock_sound, 0);
 }
 void Sound::pick_sound() {
-	Mix_PlayChannel(-1, pick_item, 0);
+	if (Mix_Playing(-1)) {
+		Mix_HaltChannel(-1);
+		Mix_PlayChannel(-1, pick_item, 0);
+	}
 }
 void Sound::open_sound() {
 	Mix_PlayChannel(-1, door_open_sound, 0);

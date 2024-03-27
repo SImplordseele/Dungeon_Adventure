@@ -51,6 +51,12 @@
     <ClCompile Include="soundeffect.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="EndingScreen.h">
+      <Filter>Header Files</Filter>
+    </ClCompile>
+    <ClCompile Include="EndingScreen.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Menu.h">

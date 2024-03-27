@@ -24,7 +24,7 @@ SDL_Texture* Menu::setTexture(TTF_Font* font, string text, SDL_Color color) {
 void Menu::setupMenu() {
     menu_Button[0].Text = "Start";
     menu_Button[0].hover = false;
-    menu_Button[0].position.x = 110;
+    menu_Button[0].position.x = 90;
     menu_Button[0].position.y = 200;
     menu_Button[0].position.w = BUTTON_WIDTH;
     menu_Button[0].position.h = BUTTON_HEIGHT;
@@ -38,7 +38,7 @@ void Menu::setupMenu() {
     menu_Button[1].texture = setTexture(menu_font, menu_Button[1].Text, buttonColor[0]);
     menu_Button[2].Text = "Exit";
     menu_Button[2].hover = false;
-    menu_Button[2].position.x = 370;
+    menu_Button[2].position.x = 400;
     menu_Button[2].position.y = 200;
     menu_Button[2].position.w = BUTTON_WIDTH;
     menu_Button[2].position.h = BUTTON_HEIGHT;
@@ -49,11 +49,12 @@ void Menu::setupMenu() {
     title_pos.w = 440;
     title_pos.h = 150;
     help_menu.set_renderer(menu_renderer);
-    if (!help_menu.LoadFileImage("Sprites/Untitled.png")) {
-        cout << "failed\n";
-    };
+    help_menu.LoadFileImage("Sprites/Untitled.png");
+    cursor[0].set_renderer(menu_renderer);
+    cursor[0].LoadFileImage("Sprites/cursor.png");
+    cursor[1].set_renderer(menu_renderer);
+    cursor[1].LoadFileImage("Sprites/cursor-off.png");
 }
-
 int Menu::showMenu() {
     SDL_Event e;
     int x, y;
@@ -69,11 +70,13 @@ int Menu::showMenu() {
                             if (!menu_Button[i].hover) {
                                 menu_Button[i].hover = true;
                                 menu_Button[i].texture = setTexture(menu_font, menu_Button[i].Text, buttonColor[1]);
+                                cursor[0].render(menu_Button[i].position.x - 50, menu_Button[i].position.y + 39);
                             }
                     }
                     else if (menu_Button[i].hover) {
                         menu_Button[i].hover = false;
                         menu_Button[i].texture = setTexture(menu_font, menu_Button[i].Text, buttonColor[0]);
+                        cursor[1].render(menu_Button[i].position.x - 50, menu_Button[i].position.y + 39);
                     }
                 }
                 break;

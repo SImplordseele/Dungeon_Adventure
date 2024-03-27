@@ -7,6 +7,22 @@ Level::Level(int cam_w, int cam_h, SDL_Window* window, SDL_Renderer* renderer, P
     this->window = window;
     this->renderer = renderer;
     this->player = player;
+    font = TTF_OpenFont("Fonts/font.ttf", 18);
+    for (int i = 0; i < 2; i++) {
+        text[i].set_font(font);
+        text[i].set_renderer(renderer);
+    }
+}
+void Level::setuptext(int x) {
+    int distance = text[0].get_height();
+    string tmp0 = std::to_string(x);
+    string tmp1 = std::to_string(3 - x);
+    string text0 = "You have " + tmp0 + " keys right now";
+    string text1 = "You still need to find " + tmp1 + " keys";
+    text[0].LoadTextImage(text0.c_str(), text_color);
+    text[1].LoadTextImage(text1.c_str(), text_color);
+    text[0].render(0, 0);
+    text[1].render(0,distance);
 }
 Level::~Level() {
     player = NULL;
@@ -69,12 +85,12 @@ int Level::PlayLevel() {
         while (SDL_PollEvent(&e) != 0) {
             if (e.type == SDL_QUIT) {
                 running = false;
-                return 7;
+                return 8;
             }
             if (e.type == SDL_KEYDOWN) {
                 if (e.key.keysym.sym == SDLK_ESCAPE || e.key.keysym.sym == SDLK_q) {
                     running = false;
-                    return 7;
+                    return 8;
                 }
                 if (e.key.keysym.sym == SDLK_h || e.key.keysym.sym == SDLK_F1) {
                     cout << Help(Help_document) << "\n";
@@ -83,7 +99,7 @@ int Level::PlayLevel() {
             player->HandleEvent(e, key1, key2, key3);
             if (player->open_door(e) == true) {
                 Level::lv++;
-                if (lv > 5) return 8;
+                if (lv > 5) return 6;
                 return lv;
             }
         }
@@ -97,6 +113,7 @@ int Level::PlayLevel() {
         key2.render(cam);
         key3.render(cam);
         player->render(cam.x, cam.y);
+        setuptext(player->getpickedkeynumber());
         SDL_RenderPresent(renderer);
     }
     return 1;

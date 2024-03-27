@@ -249,9 +249,9 @@ bool Player::open_door(SDL_Event& e) {
             int tileType = level->tiles[i]->getType();
             if (tileType == TILE_DOOR) {
                 SDL_Rect rect = level->tiles[i]->getRect();
-                for (int i = 0; i < 4; i++) {
-                    if (sprite_rect.x >= rect.x + dx1[i] && sprite_rect.x <= rect.x + dx2[i]
-                        && sprite_rect.y >= rect.y + dy1[i] && sprite_rect.y <= rect.y + dy2[i]) {
+                for (int j = 0; j < 4; j++) {
+                    if (sprite_rect.x >= rect.x + dx1[j]  && sprite_rect.x <= rect.x + dx2[j]
+                        && sprite_rect.y >= rect.y + dy1[j] && sprite_rect.y <= rect.y + dy2[j]) {
                         if (picked_key_number == TOTAL_KEY) {
                             spotify.open_sound();
                             return true;
@@ -264,8 +264,6 @@ bool Player::open_door(SDL_Event& e) {
                 }
             }
         }
-        cout << "\nYou have " << picked_key_number << " keys with you right now.\n";
-        cout << "You still need to find " << TOTAL_KEY - picked_key_number << " keys.\n";
     }
     return false;
 }
@@ -274,4 +272,10 @@ void Player::render(int camX, int camY) {
 }
 void Player::resetkey() {
     picked_key_number = 0;
+}
+SDL_Rect Player::getclipright(int i) {
+    return clip_right[i];
+}
+int Player::getpickedkeynumber() {
+    return picked_key_number;
 }

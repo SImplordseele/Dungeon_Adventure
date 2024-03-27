@@ -30,6 +30,7 @@ string OpeningScreen::ReadFile() {
     return txt.str();
 }
 void OpeningScreen::RenderText() {
+    SDL_SetRenderDrawColor(renderer,255, 255, 255, 255);
     SDL_RenderClear(renderer);
     string text = ReadFile();
     texture.LoadTextImage(text, color);
@@ -39,6 +40,7 @@ void OpeningScreen::RenderText() {
     while (true) {
         while (SDL_PollEvent(&e) != 0) {
             if (e.type == SDL_KEYDOWN && e.key.keysym.sym == SDLK_RETURN) {
+                SDL_SetRenderDrawColor(renderer, 0, 0,0, 255);
                 return;
             }
         }

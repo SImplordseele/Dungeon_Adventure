@@ -33,7 +33,9 @@ public:
     bool open_door(SDL_Event& e);
     void render(int camX, int camY);
     void resetkey();
+    int getpickedkeynumber();
     Sound spotify;
+    SDL_Rect getclipright(int i);
 private:
     SDL_Rect clip_left[TOTAL_PLAYER_SPRITE];
     SDL_Rect clip_right[TOTAL_PLAYER_SPRITE];
@@ -44,8 +46,8 @@ private:
     int startX, startY;
     Map* level;
     int picked_key_number;
-    int dx1[4] = { 0,96,0,-96 };
-    int dx2[4] = { 96,192,96,0 };
-    int dy1[4] = { -96,0,96,0 };
-    int dy2[4] = { 0,96,192,96 };
+    int dx1[4] = { 0,TILE_WIDTH,0,-TILE_WIDTH };
+    int dx2[4] = { TILE_WIDTH,2 * TILE_WIDTH,TILE_WIDTH,0 };
+    int dy1[4] = { -TILE_HEIGHT,0,TILE_HEIGHT,0 };
+    int dy2[4] = { 0,TILE_HEIGHT,2 * TILE_HEIGHT,TILE_HEIGHT };
 };

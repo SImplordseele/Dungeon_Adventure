@@ -4,7 +4,7 @@
 #include "OpeningScreen.h"
 #include "Level.h"
 #include <string.h>
-#include "Player.h"
+#include "EndingScreen.h"
 const string Help_document = "Documents/Help.txt";
 const string Level1_Map = "Maps/level_1_map.map";
 const string Tilesprite = "Sprites/tile_sprite_sheet.png";
@@ -17,6 +17,7 @@ const string Level4_Map = "Maps/level_4_map.map";
 const string Level5_Map = "Maps/level_5_map.map";
 SDL_Window* g_window = NULL;
 SDL_Renderer* g_renderer = NULL;
+SDL_Renderer* open_renderer = NULL;
 TTF_Font* g_font = NULL;
 Texture g_texture;
 string Help(string pathsrc) {
@@ -60,7 +61,7 @@ bool Init() {
 			}
 			else {
 				//Initialize renderer color
-				SDL_SetRenderDrawColor(g_renderer, 255, 255, 255, 255);
+				SDL_SetRenderDrawColor(g_renderer, 0, 0, 0, 255);
 				//Initialize PNG loading
 				int imgFlags = IMG_INIT_PNG;
 				if (!(IMG_Init(imgFlags) & imgFlags)) {
@@ -77,10 +78,6 @@ bool Init() {
 	g_font = TTF_OpenFont(fontsrc.c_str(), 24);
 	return success;
 }
-bool LoadImg() {
-	g_texture.set_renderer(g_renderer);
-	return g_texture.LoadFileImage("Sprites/black.png");
-}
 void close() {
 	SDL_DestroyRenderer(g_renderer);
 	SDL_DestroyWindow(g_window);
@@ -94,7 +91,6 @@ void close() {
 }
 int main(int argc, char* argv[]) {
 	if (!Init()) return -1;
-	if (!LoadImg()) return -1;
 	Menu startMenu(640, 480, g_window, g_renderer, g_font);
 	startMenu.setupMenu();
 	OpeningScreen screen(SCREEN_WIDTH, SCREEN_HEIGHT, g_window, g_renderer,g_font);
@@ -123,19 +119,23 @@ int main(int argc, char* argv[]) {
 	Level5Map.setMapSize(32, 20);
 	Level Level5(SCREEN_WIDTH, SCREEN_HEIGHT, g_window, g_renderer, &player);
 	Level5.SetLevel(32, 20);
+	EndingScreen Escreen(g_renderer, &player, g_font);
+	Escreen.setup();
 	Mix_Music* menu_music;
 	menu_music = Mix_LoadMUS("Sound/menu.mp3");
 	bool running = true;
 	int curr_screen = main_menu;
+	Mix_PlayMusic(menu_music, -1);
+	Mix_VolumeMusic(50);
 	while (running) {
 		switch (curr_screen) {
 			case main_menu:
-				Mix_PlayMusic(menu_music, -1);
-				g_texture.render(0,0);
 				curr_screen = startMenu.showMenu();
-				Mix_HaltMusic();
 				break;
 			case lv1:
+				if (Mix_PlayingMusic()) {
+					Mix_HaltMusic();
+				}
 				SDL_Delay(500);
 				screen.RenderText();
 				player.SetPlayerPos(96, 960);
@@ -166,16 +166,14 @@ int main(int argc, char* argv[]) {
 				Level5.LoadLevel(&Level5Map);
 				curr_screen = Level5.PlayLevel();
 				break;
+			case 6:
+				curr_screen = Escreen.play();
+				break;
 			case help:
 				SDL_Delay(200);
 				curr_screen = startMenu.showHelp();
 				break;
 			case quit:
-				cout << "Quit game\n";
-				running = false;
-				break;
-			case win:
-				cout << "You won\n";
 				running = false;
 				break;
 			case falling:

@@ -12,9 +12,9 @@ const int lv2 = 2;
 const int lv3 = 3;
 const int lv4 = 4;
 const int lv5 = 5;
-const int help = 6;
-const int quit = 7;
-const int win = 8;
+const int help = 7;
+const int quit = 8;
+const int win = 9;
 struct Button {
 public:
     string Text;
@@ -31,6 +31,7 @@ public:
     int showMenu();
     int showHelp();
 private:
+    Texture cursor[2];
     Mix_Chunk* mouse_click;
     int menu_width;
     int menu_height;

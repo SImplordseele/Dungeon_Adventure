@@ -17,6 +17,7 @@ public:
 	bool LoadFileImage(string path);
 	void LoadTextImage(string text, SDL_Color color);
 	void render(int x, int y, SDL_Rect* clip = NULL);
+	SDL_Texture* getTexture();
 	void free();
 private:
 	int width;
