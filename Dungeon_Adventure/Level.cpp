@@ -98,14 +98,12 @@ int Level::PlayLevel() {
             }
             player->HandleEvent(e, key1, key2, key3);
             if (player->open_door(e) == true) {
-                Level::lv++;
-                if (lv > 5) return 6;
+                lv++;
+                if (lv == 6) {
+                    SDL_Delay(1000);
+                }
                 return lv;
             }
-        }
-        SDL_RenderClear(renderer);
-        if (player->move_Player() == falling) {
-            return falling;
         }
         player->setCam(cam, LEVEL_WIDTH, LEVEL_HEIGHT);
         level->rendermap(cam);
@@ -114,6 +112,10 @@ int Level::PlayLevel() {
         key3.render(cam);
         player->render(cam.x, cam.y);
         setuptext(player->getpickedkeynumber());
+        if (player->move_Player() == falling) {
+            player->spotify.death_sound();
+            return falling;
+        }
         SDL_RenderPresent(renderer);
     }
     return 1;

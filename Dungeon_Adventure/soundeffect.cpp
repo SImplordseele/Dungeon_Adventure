@@ -4,6 +4,7 @@ Sound::Sound() {
 	pick_item = Mix_LoadWAV("Sound/pick.wav");
 	door_open_sound = Mix_LoadWAV("Sound/open.wav");
 	door_knock_sound = Mix_LoadWAV("Sound/knock.wav");
+	death_sound_effect = Mix_LoadMUS("Sound/death.mp3");
 	Mix_VolumeChunk(footstep, 40);
 	Mix_VolumeChunk(pick_item, MIX_MAX_VOLUME);
 }
@@ -35,4 +36,11 @@ void Sound::open_sound() {
 }
 void Sound::walk_sound() {
 	Mix_PlayChannel(-1, footstep, 0);
+}
+void Sound::death_sound() {
+	if (Mix_PlayingMusic()) {
+		Mix_HaltMusic();
+	}
+	Mix_PlayMusic(death_sound_effect, 1);
+	Mix_VolumeMusic(50);
 }

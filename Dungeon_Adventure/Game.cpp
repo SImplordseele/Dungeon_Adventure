@@ -29,7 +29,7 @@ string Help(string pathsrc) {
 	txt << open.rdbuf();
 	return txt.str();
 }
-int Level::lv = 1;
+int lv = 1;
 bool Init() {
 	//Initialization flag
 	bool success = true;
@@ -93,7 +93,7 @@ int main(int argc, char* argv[]) {
 	if (!Init()) return -1;
 	Menu startMenu(640, 480, g_window, g_renderer, g_font);
 	startMenu.setupMenu();
-	OpeningScreen screen(SCREEN_WIDTH, SCREEN_HEIGHT, g_window, g_renderer,g_font);
+	OpeningScreen screen(SCREEN_WIDTH, SCREEN_HEIGHT, g_window, g_renderer, g_font);
 	screen.SetColor(0, 0, 0);
 	screen.SetTextPath(OpenDoc);
 	Player player(PlayerSprite, 0, 0, 1, 1, g_renderer);
@@ -123,65 +123,76 @@ int main(int argc, char* argv[]) {
 	Escreen.setup();
 	Mix_Music* menu_music;
 	menu_music = Mix_LoadMUS("Sound/menu.mp3");
+	Mix_Music* ending_music;
+	ending_music = Mix_LoadMUS("Sound/ending.mp3");
+	bool check = false;
 	bool running = true;
 	int curr_screen = main_menu;
-	Mix_PlayMusic(menu_music, -1);
-	Mix_VolumeMusic(50);
 	while (running) {
 		switch (curr_screen) {
-			case main_menu:
-				curr_screen = startMenu.showMenu();
-				break;
-			case lv1:
-				if (Mix_PlayingMusic()) {
-					Mix_HaltMusic();
-				}
-				SDL_Delay(500);
+		case main_menu:
+			check = false;
+			Mix_PlayMusic(menu_music, -1);
+			Mix_VolumeMusic(50);
+			curr_screen = startMenu.showMenu();
+			break;
+		case lv1:
+			if (Mix_PlayingMusic()) {
+				Mix_HaltMusic();
+			}
+			SDL_Delay(500);
+			if (!check) {
+				check = true;
 				screen.RenderText();
-				player.SetPlayerPos(96, 960);
-				Level1.LoadLevel(&Level1Map);
-				curr_screen = Level1.PlayLevel();
-				break;
-			case lv2:
-				SDL_Delay(300);
-				player.SetPlayerPos(480, 192);
-				Level2.LoadLevel(&Level2Map);
-				curr_screen = Level2.PlayLevel();
-				break;
-			case lv3:
-				SDL_Delay(300);
-				player.SetPlayerPos(864, 576);
-				Level3.LoadLevel(&Level3Map);
-				curr_screen = Level3.PlayLevel();
-				break;
-			case lv4:
-				SDL_Delay(300);
-				player.SetPlayerPos(480, 768);
-				Level4.LoadLevel(&Level4Map);
-				curr_screen = Level4.PlayLevel();
-				break;
-			case lv5:
-				SDL_Delay(300);
-				player.SetPlayerPos(1152, 960);
-				Level5.LoadLevel(&Level5Map);
-				curr_screen = Level5.PlayLevel();
-				break;
-			case 6:
-				curr_screen = Escreen.play();
-				break;
-			case help:
-				SDL_Delay(200);
-				curr_screen = startMenu.showHelp();
-				break;
-			case quit:
-				running = false;
-				break;
-			case falling:
-				cout << "You lost\n";
-				running = false;
-				break;
-			default:
-				break;
+			}
+			player.SetPlayerPos(96, 960);
+			Level1.LoadLevel(&Level1Map);
+			curr_screen = Level1.PlayLevel();
+			break;
+		case lv2:
+			SDL_Delay(300);
+			player.SetPlayerPos(480, 192);
+			Level2.LoadLevel(&Level2Map);
+			curr_screen = Level2.PlayLevel();
+			break;
+		case lv3:
+			SDL_Delay(300);
+			player.SetPlayerPos(864, 576);
+			Level3.LoadLevel(&Level3Map);
+			curr_screen = Level3.PlayLevel();
+			break;
+		case lv4:
+			SDL_Delay(300);
+			player.SetPlayerPos(480, 768);
+			Level4.LoadLevel(&Level4Map);
+			curr_screen = Level4.PlayLevel();
+			break;
+		case lv5:
+			SDL_Delay(300);
+			player.SetPlayerPos(1152, 960);
+			Level5.LoadLevel(&Level5Map);
+			curr_screen = Level5.PlayLevel();
+			break;
+		case 6:
+			if (Mix_PlayingMusic()) {
+				Mix_HaltMusic();
+			}
+			Mix_PlayMusic(ending_music, -1);
+			Mix_VolumeMusic(50);
+			curr_screen = Escreen.play();
+			break;
+		case help:
+			SDL_Delay(200);
+			curr_screen = startMenu.showHelp();
+			break;
+		case quit:
+			running = false;
+			break;
+		case falling:
+			curr_screen = startMenu.showFall();
+			break;
+		default:
+			break;
 		}
 	}
 	cout << "END GAME\n";

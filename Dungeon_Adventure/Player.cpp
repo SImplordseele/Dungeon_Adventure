@@ -148,6 +148,8 @@ int Player::move_Player() {
                 break;
             }
             if (positionOnTile == fall_hole) {
+                x_vel = 0;
+                y_vel = 0;
                 return falling;
             }
             frameCount++;
@@ -167,6 +169,8 @@ int Player::move_Player() {
                 break;
             }
             if (positionOnTile == fall_hole) {
+                x_vel = 0;
+                y_vel = 0;
                 return falling;
             }
             frameCount++;
@@ -186,6 +190,8 @@ int Player::move_Player() {
                 break;
             }
             if (positionOnTile == fall_hole) {
+                x_vel = 0;
+                y_vel = 0;
                 return falling;
             }
             frameCount++;
@@ -205,6 +211,8 @@ int Player::move_Player() {
                 break;
             }
             if (positionOnTile == fall_hole) {
+                x_vel = 0;
+                y_vel = 0;
                 return falling;
             }
             frameCount++;
@@ -250,7 +258,7 @@ bool Player::open_door(SDL_Event& e) {
             if (tileType == TILE_DOOR) {
                 SDL_Rect rect = level->tiles[i]->getRect();
                 for (int j = 0; j < 4; j++) {
-                    if (sprite_rect.x >= rect.x + dx1[j]  && sprite_rect.x <= rect.x + dx2[j]
+                    if (sprite_rect.x >= rect.x + dx1[j] && sprite_rect.x <= rect.x + dx2[j]
                         && sprite_rect.y >= rect.y + dy1[j] && sprite_rect.y <= rect.y + dy2[j]) {
                         if (picked_key_number == TOTAL_KEY) {
                             spotify.open_sound();

@@ -7,10 +7,11 @@ public:
 	void pick_sound();
 	void open_sound();
 	void walk_sound();
-	bool isplayed();
+	void death_sound();
 private:
 	Mix_Chunk* footstep = NULL;
 	Mix_Chunk* pick_item = NULL;
 	Mix_Chunk* door_open_sound = NULL;
 	Mix_Chunk* door_knock_sound = NULL;
+	Mix_Music* death_sound_effect = NULL;
 };

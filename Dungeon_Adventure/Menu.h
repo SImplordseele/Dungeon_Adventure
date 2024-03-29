@@ -15,6 +15,7 @@ const int lv5 = 5;
 const int help = 7;
 const int quit = 8;
 const int win = 9;
+extern int lv;
 struct Button {
 public:
     string Text;
@@ -30,6 +31,7 @@ public:
     void setupMenu();
     int showMenu();
     int showHelp();
+    int showFall();
 private:
     Texture cursor[2];
     Mix_Chunk* mouse_click;
@@ -40,8 +42,12 @@ private:
     SDL_Window* menu_window;
     SDL_Renderer* menu_renderer;
     Button* menu_Button;
+    Button* fall;
+    SDL_Color fall_color = { 205,0,0 };
     SDL_Color buttonColor[2] = { {255, 255, 255}, {105, 105, 105} };
     SDL_Texture* title;
     SDL_Rect title_pos;
+    SDL_Texture* title_fall;
+    SDL_Rect title_fall_pos;
 };
 
