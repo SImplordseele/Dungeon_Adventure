@@ -28,8 +28,8 @@ void Sound::knock_sound() {
 void Sound::pick_sound() {
 	if (Mix_Playing(-1)) {
 		Mix_HaltChannel(-1);
-		Mix_PlayChannel(-1, pick_item, 0);
 	}
+	Mix_PlayChannel(-1, pick_item, 0);
 }
 void Sound::open_sound() {
 	Mix_PlayChannel(-1, door_open_sound, 0);

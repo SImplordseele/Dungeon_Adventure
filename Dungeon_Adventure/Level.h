@@ -12,7 +12,7 @@ extern string Help(string);
 extern int lv;
 class Level {
 public:
-    Level(int cam_w, int cam_h, SDL_Window* window, SDL_Renderer* renderer, Player* player);
+    Level(int cam_w, int cam_h, SDL_Renderer* renderer, Player* player);
     ~Level();
     void SetLevel(int x, int y);
     SDL_Texture* LoadTexture(string path);
@@ -27,7 +27,6 @@ private:
     SDL_Color text_color = { 255,255,255 };
     int LEVEL_WIDTH;
     int LEVEL_HEIGHT;
-    SDL_Window* window = NULL;
     SDL_Renderer* renderer = NULL;
     Map* level = NULL;
     Player* player = NULL;

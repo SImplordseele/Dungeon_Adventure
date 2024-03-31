@@ -7,14 +7,13 @@ using std::ifstream;
 using std::stringstream;
 class OpeningScreen {
 public:
-    OpeningScreen(int w, int h, SDL_Window* window, SDL_Renderer* renderer, TTF_Font* font);
+    OpeningScreen(int w, int h, SDL_Renderer* renderer, TTF_Font* font);
     ~OpeningScreen();
     void SetColor(Uint8 r, Uint8 g, Uint8 b);
     void SetTextPath(string path);
     string ReadFile();
     void RenderText();
 private:
-    SDL_Window* window = NULL;
     SDL_Renderer* renderer = NULL;
     TTF_Font* font = NULL;
     int width;

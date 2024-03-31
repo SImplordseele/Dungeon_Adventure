@@ -43,8 +43,9 @@ private:
     SDL_Renderer* menu_renderer;
     Button* menu_Button;
     Button* fall;
-    SDL_Color fall_color = { 205,0,0 };
-    SDL_Color buttonColor[2] = { {255, 255, 255}, {105, 105, 105} };
+    SDL_Color fall_color = { 255,0,0 };
+    SDL_Color name = { 128,0,128 };
+    SDL_Color buttonColor[2] = { {255, 255, 255}, {144, 238, 144} };
     SDL_Texture* title;
     SDL_Rect title_pos;
     SDL_Texture* title_fall;

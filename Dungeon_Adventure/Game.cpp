@@ -93,7 +93,7 @@ int main(int argc, char* argv[]) {
 	if (!Init()) return -1;
 	Menu startMenu(640, 480, g_window, g_renderer, g_font);
 	startMenu.setupMenu();
-	OpeningScreen screen(SCREEN_WIDTH, SCREEN_HEIGHT, g_window, g_renderer, g_font);
+	OpeningScreen screen(SCREEN_WIDTH, SCREEN_HEIGHT, g_renderer, g_font);
 	screen.SetColor(0, 0, 0);
 	screen.SetTextPath(OpenDoc);
 	Player player(PlayerSprite, 0, 0, 1, 1, g_renderer);
@@ -101,23 +101,23 @@ int main(int argc, char* argv[]) {
 	player.setClip(0, 96, Player_sprite_width, Player_sprite_height);
 	Map Level1Map(286, Level1_Map, Tilesprite, g_renderer);
 	Level1Map.setMapSize(22, 13);
-	Level Level1(SCREEN_WIDTH, SCREEN_HEIGHT, g_window, g_renderer, &player);
+	Level Level1(SCREEN_WIDTH, SCREEN_HEIGHT,g_renderer, &player);
 	Level1.SetLevel(22, 13);
 	Map Level2Map(286, Level2_Map, Tilesprite, g_renderer);
 	Level2Map.setMapSize(22, 13);
-	Level Level2(SCREEN_WIDTH, SCREEN_HEIGHT, g_window, g_renderer, &player);
+	Level Level2(SCREEN_WIDTH, SCREEN_HEIGHT, g_renderer, &player);
 	Level2.SetLevel(22, 13);
 	Map Level3Map(345, Level3_Map, Tilesprite, g_renderer);
 	Level3Map.setMapSize(23, 15);
-	Level Level3(SCREEN_WIDTH, SCREEN_HEIGHT, g_window, g_renderer, &player);
+	Level Level3(SCREEN_WIDTH, SCREEN_HEIGHT, g_renderer, &player);
 	Level3.SetLevel(23, 15);
 	Map Level4Map(504, Level4_Map, Tilesprite, g_renderer);
 	Level4Map.setMapSize(28, 18);
-	Level Level4(SCREEN_WIDTH, SCREEN_HEIGHT, g_window, g_renderer, &player);
+	Level Level4(SCREEN_WIDTH, SCREEN_HEIGHT,g_renderer, &player);
 	Level4.SetLevel(28, 18);
 	Map Level5Map(640, Level5_Map, Tilesprite, g_renderer);
 	Level5Map.setMapSize(32, 20);
-	Level Level5(SCREEN_WIDTH, SCREEN_HEIGHT, g_window, g_renderer, &player);
+	Level Level5(SCREEN_WIDTH, SCREEN_HEIGHT,g_renderer, &player);
 	Level5.SetLevel(32, 20);
 	EndingScreen Escreen(g_renderer, &player, g_font);
 	Escreen.setup();
@@ -126,23 +126,26 @@ int main(int argc, char* argv[]) {
 	Mix_Music* ending_music;
 	ending_music = Mix_LoadMUS("Sound/ending.mp3");
 	bool check = false;
+	bool check1 = false;
 	bool running = true;
 	int curr_screen = main_menu;
 	while (running) {
 		switch (curr_screen) {
 		case main_menu:
-			check = false;
-			Mix_PlayMusic(menu_music, -1);
-			Mix_VolumeMusic(50);
+			Mix_VolumeMusic(70);
+			if (!check) {
+				check = true;
+				Mix_PlayMusic(menu_music, -1);
+			}
 			curr_screen = startMenu.showMenu();
 			break;
 		case lv1:
+			check = true;
 			if (Mix_PlayingMusic()) {
 				Mix_HaltMusic();
 			}
 			SDL_Delay(500);
-			if (!check) {
-				check = true;
+			if (!check1) {
 				screen.RenderText();
 			}
 			player.SetPlayerPos(96, 960);
@@ -174,11 +177,8 @@ int main(int argc, char* argv[]) {
 			curr_screen = Level5.PlayLevel();
 			break;
 		case 6:
-			if (Mix_PlayingMusic()) {
-				Mix_HaltMusic();
-			}
+			Mix_VolumeMusic(100);
 			Mix_PlayMusic(ending_music, -1);
-			Mix_VolumeMusic(50);
 			curr_screen = Escreen.play();
 			break;
 		case help:
@@ -190,12 +190,15 @@ int main(int argc, char* argv[]) {
 			break;
 		case falling:
 			curr_screen = startMenu.showFall();
+			if (Mix_PlayingMusic()) {
+				Mix_HaltMusic();
+			}
+			check = false;
 			break;
 		default:
 			break;
 		}
 	}
-	cout << "END GAME\n";
 	close();
 	return 0;
 }

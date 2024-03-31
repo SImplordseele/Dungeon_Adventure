@@ -134,7 +134,7 @@
       <AdditionalIncludeDirectories>C:\Program Files\SDL2-lib\SDL2_image-2.0.5\include;C:\Program Files\SDL2-lib\SDL2_mixer-2.0.4\include;C:\Program Files\SDL2-lib\SDL2_ttf-2.21.1\include;C:\Program Files\SDL2-lib\SDL2-2.30.0\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
-      <SubSystem>Console</SubSystem>
+      <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>C:\Program Files\SDL2-lib\SDL2-2.30.0\lib\x64;C:\Program Files\SDL2-lib\SDL2_ttf-2.21.1\lib\x64;C:\Program Files\SDL2-lib\SDL2_image-2.0.5\lib\x64;C:\Program Files\SDL2-lib\SDL2_mixer-2.0.4\lib\x64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2test.lib;SDL2_ttf.lib;SDL2_mixer.lib;SDL2_image.lib;%(AdditionalDependencies)</AdditionalDependencies>

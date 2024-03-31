@@ -142,8 +142,7 @@
               "ViewState": "AQIAAJ4AAAAAAAAAAAAUwMgAAAABAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
               "WhenOpened": "2024-03-15T13:29:23.839Z",
-              "IsPinned": true,
-              "EditorCaption": ""
+              "IsPinned": true
             },
             {
               "$type": "Document",
@@ -156,8 +155,7 @@
               "ViewState": "AQIAAIgAAAAAAAAAAAAUwCEBAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
               "WhenOpened": "2024-03-15T14:09:47.215Z",
-              "IsPinned": true,
-              "EditorCaption": ""
+              "IsPinned": true
             },
             {
               "$type": "Document",
@@ -170,8 +168,7 @@
               "ViewState": "AQIAAAwAAAAAAAAAAAAAABUAAAAWAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
               "WhenOpened": "2024-03-15T14:44:05.545Z",
-              "IsPinned": true,
-              "EditorCaption": ""
+              "IsPinned": true
             },
             {
               "$type": "Document",
@@ -196,8 +193,7 @@
               "RelativeToolTip": "Dungeon_Adventure\\EndingScreen.cpp",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2024-03-29T02:44:01.028Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-03-29T02:44:01.028Z"
             },
             {
               "$type": "Document",
@@ -209,8 +205,7 @@
               "RelativeToolTip": "Dungeon_Adventure\\soundeffect.cpp",
               "ViewState": "AQIAAA8AAAAAAAAAAAAAACcAAAAbAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2024-03-29T02:41:06.337Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-03-29T02:41:06.337Z"
             },
             {
               "$type": "Document",
@@ -222,8 +217,7 @@
               "RelativeToolTip": "Dungeon_Adventure\\Menu.cpp",
               "ViewState": "AQIAAHoAAAAAAAAAAAAUwNEAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2024-03-20T08:08:10.2Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-03-20T08:08:10.2Z"
             },
             {
               "$type": "Document",
@@ -235,8 +229,7 @@
               "RelativeToolTip": "Dungeon_Adventure\\Menu.h",
               "ViewState": "AQIAAA8AAAAAAAAAAAAAADUAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2024-03-19T13:01:54.462Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-03-19T13:01:54.462Z"
             },
             {
               "$type": "Document",
@@ -248,8 +241,7 @@
               "RelativeToolTip": "Dungeon_Adventure\\Level.h",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAsAAAAOAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2024-03-19T13:03:39.541Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-03-19T13:03:39.541Z"
             },
             {
               "$type": "Document",
@@ -261,8 +253,7 @@
               "RelativeToolTip": "Dungeon_Adventure\\Key.cpp",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAQAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2024-03-15T14:11:15.43Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-03-15T14:11:15.43Z"
             },
             {
               "$type": "Document",
@@ -274,8 +265,7 @@
               "RelativeToolTip": "Dungeon_Adventure\\soundeffect.h",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAA8AAAAmAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2024-03-29T02:40:51.834Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-03-29T02:40:51.834Z"
             },
             {
               "$type": "Document",

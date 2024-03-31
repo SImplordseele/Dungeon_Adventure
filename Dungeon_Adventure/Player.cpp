@@ -266,7 +266,7 @@ bool Player::open_door(SDL_Event& e) {
                         }
                         else {
                             spotify.knock_sound();
-                            SDL_Delay(1000);
+                            SDL_Delay(500);
                         }
                     }
                 }

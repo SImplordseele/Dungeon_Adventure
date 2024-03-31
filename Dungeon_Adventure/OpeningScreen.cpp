@@ -1,15 +1,13 @@
 #include "OpeningScreen.h"
-OpeningScreen::OpeningScreen(int w, int h, SDL_Window* window, SDL_Renderer* renderer, TTF_Font* font) {
+OpeningScreen::OpeningScreen(int w, int h,SDL_Renderer* renderer, TTF_Font* font) {
     height = h;
     width = w;
-    this->window = window;
     this->renderer = renderer;
     this->font = font;
     texture.set_font(font);
     texture.set_renderer(renderer);
 }
 OpeningScreen::~OpeningScreen() {
-    window = NULL;
     renderer = NULL;
     font = NULL;
 }
@@ -22,9 +20,6 @@ void OpeningScreen::SetTextPath(string path) {
 string OpeningScreen::ReadFile() {
     ifstream in;
     in.open(src);
-    if (in.fail()) {
-        return "Can not open file\n";
-    }
     stringstream txt;
     txt << in.rdbuf();
     return txt.str();

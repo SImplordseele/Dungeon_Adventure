@@ -1,4 +1,4 @@
-#include "Menu.h"
+﻿#include "Menu.h"
 Menu::Menu(int w, int h, SDL_Window* window, SDL_Renderer* renderer, TTF_Font* font) {
     menu_width = w;
     menu_height = h;
@@ -45,7 +45,7 @@ void Menu::setupMenu() {
     menu_Button[2].position.w = BUTTON_WIDTH;
     menu_Button[2].position.h = BUTTON_HEIGHT;
     menu_Button[2].texture = setTexture(menu_font, menu_Button[2].Text, buttonColor[0]);
-    title = setTexture(menu_font, "DUNGEON ADVENTURE", buttonColor[0]);
+    title = setTexture(menu_font, "DUNGEON ADVENTURE", name);
     title_pos.x = 100;
     title_pos.y = 50;
     title_pos.w = 440;

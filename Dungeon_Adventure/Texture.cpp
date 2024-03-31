@@ -34,12 +34,10 @@ void Texture::LoadTextImage(string text, SDL_Color textColor) {
     free();
     SDL_Surface* textSurface = TTF_RenderText_Blended_Wrapped(font, text.c_str(), textColor, 600);
     if (textSurface == NULL) {
-        cout << "Error while rendering surface\n" ;
         return;
     }
     texture = SDL_CreateTextureFromSurface(renderer, textSurface);
     if (texture == NULL) {
-        cout << "Error while creating texture\n";
         return;
     }
     width = textSurface->w;

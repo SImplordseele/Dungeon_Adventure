@@ -33,14 +33,12 @@ void Map::LoadTile() {
             int type = -1;
             source >> type;
             if (source.fail()) {
-                cout << "Can not read file\n";
                 return;
             }
             if (type >= 0 && type < TOTAL_TILE_SPRITES) {
                 tiles[i] = new Tile(x, y, type);
             }
             else {
-                cout << "File is invalid\n";
                 return;
             }
             x += TILE_WIDTH;

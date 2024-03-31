@@ -1,10 +1,9 @@
 #include "Level.h"
-Level::Level(int cam_w, int cam_h, SDL_Window* window, SDL_Renderer* renderer, Player* player) {
+Level::Level(int cam_w, int cam_h, SDL_Renderer* renderer, Player* player) {
     cam.x = 0;
     cam.y = 0;
     cam.w = cam_w;
     cam.h = cam_h;
-    this->window = window;
     this->renderer = renderer;
     this->player = player;
     font = TTF_OpenFont("Fonts/font.ttf", 18);
@@ -26,7 +25,6 @@ void Level::setuptext(int x) {
 }
 Level::~Level() {
     player = NULL;
-    window = NULL;
     renderer = NULL;
     level = NULL;
 }
@@ -61,7 +59,7 @@ int Level::PlayLevel() {
     Key key3("Sprites/Key.png", 1152, 768, 0, 0, renderer);
     if (lv == 2) {
         key1.changepos(192, 672);
-        key2.changepos(384, 960);
+        key2.changepos(1536, 384);
         key3.changepos(1056, 384);
     }
     else if (lv == 3) {
