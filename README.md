@@ -2,9 +2,9 @@
 
 A small SDL2 Game written in C++ and based on an idea from The Legend of Zelda: A Link to the Past, but is a much more simplified edition.
 
-![A screenshot of a video game Description automatically generated](media/919edc2bd64bc4423eee859bb7ba64ed.png =400x300)
+![](media/919edc2bd64bc4423eee859bb7ba64ed.png)
 
-![A video game with a pixelated character Description automatically generated](media/39cad67d5564d22948b75d827ff09653.png =400x300)
+![](media/39cad67d5564d22948b75d827ff09653.png)
 
 This is what it looks like: click [here](https://www.youtube.com/watch?v=SBL8ckMv_b4&ab_channel=Tu%E1%BA%A5nAnhNguy%E1%BB%85nNg%E1%BB%8Dc).
 
