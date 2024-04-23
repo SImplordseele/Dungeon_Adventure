@@ -2,10 +2,9 @@
 
 A small SDL2 Game written in C++ and based on an idea from The Legend of Zelda: A Link to the Past, but is a much more simplified edition.
 
-![](media/1.png)
+![](media/ead2a83b9238f8bd03e9152db365cddd.png)
 
-![](media/39cad67d5564d22948b75d827ff09653.png)
-<img src="[https://user-images.githubusercontent.com/16319829/81180309-2b51f000-8fee-11ea-8a78-ddfe8c3412a7.png](https://github.com/SImplordseele/Dungeon_Adventure/blob/main/media/39cad67d5564d22948b75d827ff09653.png)" width=50% height=50%>
+![A screenshot of a video game Description automatically generated](media/31a45f34fedbd765f5f93665fc748c56.png)
 
 This is what it looks like: click [here](https://www.youtube.com/watch?v=SBL8ckMv_b4&ab_channel=Tu%E1%BA%A5nAnhNguy%E1%BB%85nNg%E1%BB%8Dc).
 
@@ -38,4 +37,9 @@ Note:
 
 # Reference and Assets
 
-The reference source is
+The reference and assets are deeply inspired by Ruins Escapade and Lazy Foo .
+
+Here are the links:
+
+-   [Ruins Escapade](https://github.com/AparaV/Ruins-Escapade)
+-   [Lazy Foo](https://lazyfoo.net/tutorials/SDL/)
