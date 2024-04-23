@@ -2,7 +2,7 @@
 
 A small SDL2 Game written in C++ and based on an idea from The Legend of Zelda: A Link to the Past, but is a much more simplified edition.
 
-![](media/919edc2bd64bc4423eee859bb7ba64ed.png)
+![](media/1.png)
 
 ![](media/39cad67d5564d22948b75d827ff09653.png)
 <img src="[https://user-images.githubusercontent.com/16319829/81180309-2b51f000-8fee-11ea-8a78-ddfe8c3412a7.png](https://github.com/SImplordseele/Dungeon_Adventure/blob/main/media/39cad67d5564d22948b75d827ff09653.png)" width=50% height=50%>
