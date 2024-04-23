@@ -6,7 +6,7 @@ A small SDL2 Game written in C++ and based on an idea from The Legend of Zelda: 
 
 ![](media/31a45f34fedbd765f5f93665fc748c56.png)
 
-This is what it looks like: click [here](https://www.youtube.com/watch?v=SBL8ckMv_b4&ab_channel=Tu%E1%BA%A5nAnhNguy%E1%BB%85nNg%E1%BB%8Dc).
+This is what it looks like: click [here](https://www.youtube.com/watch?v=ZUIyq97FVTQ&ab_channel=Tu%E1%BA%A5nAnhNguy%E1%BB%85nNg%E1%BB%8Dc).
 
 The libraries are C++ libraries, SDL2, SDL2_image, SDL2_font,SDL2_mixer.
 
