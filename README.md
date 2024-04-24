@@ -32,7 +32,7 @@ Click on Help on the menu screen to see details.
 
 Note:
 
--   You need to have a total of 3 keys to open the door, otherwise you can enter the next level.
+-   You need to have a total of 3 keys to open the door, or you can not enter the next level.
 -   You also need to avoid traps (holes) or you’ll fall and die.
 
 # Reference and Assets
