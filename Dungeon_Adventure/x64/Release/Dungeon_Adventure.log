@@ -1,0 +1,7 @@
+﻿x64\Release\EndingScreen.obj : warning LNK4042: object specified more than once; extras ignored
+x64\Release\soundeffect.obj : warning LNK4042: object specified more than once; extras ignored
+  Generating code
+  Previous IPDB and IOBJ mismatch, fall back to full compilation.
+  All 341 functions were compiled because no usable IPDB/IOBJ from previous compilation was found.
+  Finished generating code
+  Dungeon_Adventure.vcxproj -> C:\Users\Admin\Dungeon_Adventure\x64\Release\Dungeon_Adventure.exe
