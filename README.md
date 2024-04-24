@@ -35,6 +35,7 @@ Click on Help on the menu screen to see details.
 -   WASD to move the player
 -   SPACE to pick up the key
 -   SPACE to open door
+-   ESC/Q to exit game
 
 Note:
 
